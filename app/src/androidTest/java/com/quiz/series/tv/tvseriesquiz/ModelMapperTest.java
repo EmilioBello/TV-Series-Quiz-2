@@ -4,11 +4,15 @@ import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADQuestion;
+import com.quiz.series.tv.tvseriesquiz.model.POJO.ADSerie;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADQuestionDAO;
+import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADSerieDAO;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
+
+import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -18,7 +22,7 @@ public class ModelMapperTest {
 
     @Test
     public void mapperQuestionToQuestionDAO(){
-        ModelMapper modelMapper = new ModelMapper();
+        final ModelMapper modelMapper = new ModelMapper();
 
         final ADQuestion  question = createQuestion();
 
@@ -38,6 +42,26 @@ public class ModelMapperTest {
         assertEquals (dao.getLanguage(), question.getLanguage());
 
         assertEquals (dao.getSerieCode(), question.getSerieCode());
+    }
+
+    @Test
+    public void mapperSerieToSerieDAO(){
+        final ModelMapper modelMapper = new ModelMapper();
+
+        final ADSerie entity = createSerie();
+
+        final ADSerieDAO dao = modelMapper.map(entity, ADSerieDAO.class);
+
+        assertEquals (dao.getCode(), entity.getCode());
+        assertEquals (dao.getName(), entity.getName());
+        assertEquals (dao.getSeason(), entity.getSeason());
+        assertEquals (dao.getTotalEpisodes(), entity.getTotalEpisodes());
+        assertEquals (dao.isDownloaded(), entity.isDownloaded());
+        assertEquals (dao.getListEpisode(), entity.getListEpisode());
+        assertEquals (dao.isComplete(), entity.isComplete());
+        assertEquals (dao.getStatus(), entity.getStatus());
+        assertEquals (dao.getUrlAvatar(), entity.getUrlAvatar());
+        assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground());
     }
 
     private ADQuestion createQuestion(){
@@ -60,5 +84,34 @@ public class ModelMapperTest {
         question.setSerieCode(7);
 
         return question;
+    }
+
+    private ADSerie createSerie() {
+        ADSerie entity = ADSerie.builder().build();
+
+        entity.setCode(1);
+
+        entity.setName("Game of Thrones");
+
+        entity.setSeason(2);
+        entity.setTotalEpisodes(3);
+
+        entity.setSeasonProgress(4);
+        entity.setEpisodeProgress(5);
+
+        entity.setDownloaded(true);
+
+        ArrayList<Integer> episodes = new ArrayList<>();
+        episodes.add(1);
+        episodes.add(2);
+        entity.setListEpisode(episodes);
+
+        entity.setComplete(false);
+        entity.setStatus(6);
+
+        entity.setUrlAvatar("7");
+        entity.setUrlImageBackground("8");
+
+        return entity;
     }
 }
