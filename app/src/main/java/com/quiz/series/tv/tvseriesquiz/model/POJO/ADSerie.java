@@ -2,7 +2,6 @@ package com.quiz.series.tv.tvseriesquiz.model.POJO;
 
 import java.util.ArrayList;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,7 +10,6 @@ import lombok.EqualsAndHashCode;
  */
 
 @Data
-@Builder
 @EqualsAndHashCode(callSuper=false)
 public class ADSerie {
 
