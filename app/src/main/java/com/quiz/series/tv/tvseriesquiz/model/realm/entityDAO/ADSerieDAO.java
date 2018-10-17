@@ -1,7 +1,6 @@
 package com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO;
 
-import java.util.ArrayList;
-
+import io.realm.RealmList;
 import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
@@ -24,7 +23,7 @@ public class ADSerieDAO implements RealmModel{
 
     private boolean downloaded;
 
-    private ArrayList<Integer> listEpisode;
+    private RealmList<Integer> listEpisode;
 
     private boolean complete;
     private int status;
