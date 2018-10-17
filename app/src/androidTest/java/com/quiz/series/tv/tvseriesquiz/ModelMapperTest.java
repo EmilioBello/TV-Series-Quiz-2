@@ -5,8 +5,10 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADQuestion;
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADSerie;
+import com.quiz.series.tv.tvseriesquiz.model.POJO.ADVersion;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADQuestionDAO;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADSerieDAO;
+import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADVersionDAO;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +66,19 @@ public class ModelMapperTest {
         assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground());
     }
 
+    @Test
+    public void mapperVersionToVersionDAO(){
+        final ModelMapper modelMapper = new ModelMapper();
+
+        final ADVersion entity = createVersion();
+
+        final ADVersionDAO dao = modelMapper.map(entity, ADVersionDAO.class);
+
+        assertEquals (dao.getCode(), entity.getCode());
+        assertEquals (dao.getName(), entity.getName());
+        assertEquals (dao.getVersion(), entity.getVersion());
+    }
+
     private ADQuestion createQuestion(){
         ADQuestion question = ADQuestion.builder().build();
 
@@ -111,6 +126,16 @@ public class ModelMapperTest {
 
         entity.setUrlAvatar("7");
         entity.setUrlImageBackground("8");
+
+        return entity;
+    }
+
+    private ADVersion createVersion() {
+        ADVersion entity = ADVersion.builder().build();
+
+        entity.setCode(1);
+        entity.setName("ADSerie");
+        entity.setVersion(2);
 
         return entity;
     }
