@@ -1,4 +1,4 @@
-package com.quiz.series.tv.tvseriesquiz.model.entity;
+package com.quiz.series.tv.tvseriesquiz.model.POJO;
 
 import lombok.Builder;
 import lombok.Data;
