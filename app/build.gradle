@@ -35,4 +35,9 @@ dependencies {
     //Mapper
     implementation 'org.modelmapper:modelmapper:2.3.0'
     annotationProcessor 'org.modelmapper:modelmapper:2.3.0'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.4'
 }
+
+apply plugin: 'com.google.gms.google-services'
