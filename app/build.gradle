@@ -31,4 +31,8 @@ dependencies {
     //lombok
     compileOnly 'org.projectlombok:lombok:1.18.2'
     annotationProcessor 'org.projectlombok:lombok:1.18.2'
+
+    //Mapper
+    implementation 'org.modelmapper:modelmapper:2.3.0'
+    annotationProcessor 'org.modelmapper:modelmapper:2.3.0'
 }
