@@ -80,7 +80,7 @@ public class ModelMapperTest {
     }
 
     private ADQuestion createQuestion(){
-        ADQuestion question = ADQuestion.builder().build();
+        ADQuestion question = new ADQuestion();
 
         question.setCode(1);
 
@@ -102,7 +102,7 @@ public class ModelMapperTest {
     }
 
     private ADSerie createSerie() {
-        ADSerie entity = ADSerie.builder().build();
+        ADSerie entity = new ADSerie();
 
         entity.setCode(1);
 
@@ -131,7 +131,7 @@ public class ModelMapperTest {
     }
 
     private ADVersion createVersion() {
-        ADVersion entity = ADVersion.builder().build();
+        ADVersion entity = new ADVersion();
 
         entity.setCode(1);
         entity.setName("ADSerie");
