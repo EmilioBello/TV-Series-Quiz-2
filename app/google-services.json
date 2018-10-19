@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "126412696321-fek2q6rqa072j6bjkeg318rbqsg4vi0a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quiz.series.tv.tvseriesquiz",
+            "certificate_hash": "86cf1ff130e7b4e7efd7ea52f83dd9d92b7c0de1"
+          }
+        },
+        {
           "client_id": "126412696321-mm85cao3gneul9lntl18la0i0nv936d9.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126412696321-mm85cao3gneul9lntl18la0i0nv936d9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
