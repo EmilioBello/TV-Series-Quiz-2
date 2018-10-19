@@ -5,11 +5,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ADQuestionJSON {
+public class ADQuestionJSON extends ADEntityJSON{
 
-    private int code;
-    private int active;
-    private long updatedAt;
+    public ADQuestionJSON() {}
 
     private String question;
     private String answer1;

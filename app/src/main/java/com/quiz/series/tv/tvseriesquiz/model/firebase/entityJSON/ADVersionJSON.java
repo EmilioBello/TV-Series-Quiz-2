@@ -5,11 +5,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ADVersionJSON{
+public class ADVersionJSON extends ADEntityJSON{
 
-    private int code;
-    private boolean active;
-    private long updatedAt;
+    public ADVersionJSON() {}
 
     private String name;
     private int version;
