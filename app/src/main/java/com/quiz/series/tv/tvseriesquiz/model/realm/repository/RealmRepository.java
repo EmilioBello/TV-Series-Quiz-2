@@ -74,11 +74,9 @@ public class RealmRepository<In, Out> {
         }
     }
 
-    public List<In> fetchQuery(RealmQuery<Out> query) {
+    private List<In> fetchQuery(RealmQuery<Out> query) {
 
-        RealmResults<Out> entitiesDAO = null;
-
-        entitiesDAO = query.findAll();
+        RealmResults<Out> entitiesDAO = query.findAll();
 
         final ModelMapper modelMapper = new ModelMapper();
 
