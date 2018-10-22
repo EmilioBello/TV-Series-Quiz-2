@@ -1,11 +1,14 @@
 package com.quiz.series.tv.tvseriesquiz.model.firebase.entityJSON;
 
-public class ADSerieJSON {
 
-    //ADEntity
-    private int code;
-    private boolean active;
-    private long updatedAt;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class ADSerieJSON extends ADEntityJSON{
+
+    public ADSerieJSON() {}
 
     private String name;
     private int seasons;
