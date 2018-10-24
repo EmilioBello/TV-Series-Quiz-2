@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmModel;
 import io.realm.RealmQuery;
 
 import static junit.framework.Assert.assertEquals;
@@ -208,21 +209,26 @@ public class RepositoryRealmTest {
         return entities;
     }
 
-    private RealmQuery<ADQuestionDAO> buildQueryOneValue() {
-        RealmQuery<ADQuestionDAO> query;
+    private RealmQuery<RealmModel> buildQueryOneValue() {
+        RealmQuery<RealmModel> query;
         Realm realm = Realm.getDefaultInstance();
 
-        query = realm.where(ADQuestionDAO.class);
+        final Class type = ADQuestionDAO.class;
+
+        query = realm.where(type);
         query.equalTo(ADQuestionSchema.code, 1);
 
         return query;
     }
 
-    private RealmQuery<ADQuestionDAO> buildQueryAll() {
-        RealmQuery<ADQuestionDAO> query;
+    private RealmQuery<RealmModel> buildQueryAll() {
+        RealmQuery<RealmModel> query;
         Realm realm = Realm.getDefaultInstance();
 
-        query = realm.where(ADQuestionDAO.class).sort(ADQuestionSchema.code);
+        final Class type = ADQuestionDAO.class;
+
+        query = realm.where(type)
+                .sort(ADQuestionSchema.code);
 
         return query;
     }
