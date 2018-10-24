@@ -1,4 +1,4 @@
-package com.quiz.series.tv.tvseriesquiz.presenter.interactor;
+package com.quiz.series.tv.tvseriesquiz.presenter.interactor.getFromRealm;
 
 import java.util.List;
 
