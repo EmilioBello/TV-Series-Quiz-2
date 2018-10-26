@@ -59,6 +59,18 @@ public class RealmRepository<In, Out> {
         }
     }
 
+    public void saveDAO(final List<Out> entities){
+        if(!entities.isEmpty()){
+            Realm realm = getRealm();
+            realm.beginTransaction();
+
+            realm.insertOrUpdate((Collection<? extends RealmModel>) entities);
+
+            realm.commitTransaction();
+            realm.close();
+        }
+    }
+
     public List<In> fetchAll(RealmQuery<RealmModel> query) {
         return fetchQuery(query);
     }
