@@ -15,12 +15,13 @@ import com.quiz.series.tv.tvseriesquiz.utils.executor.MainThread;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+//In = POJO, Out = EntityDAO
 public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterface,Runnable {
 
     private final Executor executor;
     private final MainThread mainThread;
     private final Class<In> typeIn;
-    private final Class typeOut;
+    private final Class<Out> typeOut;
 
     private Callback callback;
 
@@ -31,7 +32,7 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
     //Context
     protected final Context context;
 
-    public SyncronizeInteractor(@NonNull final Executor executor,@NonNull final MainThread mainThread,@NonNull final Class<In> typeIn, @NonNull final Class typeOut) {
+    public SyncronizeInteractor(@NonNull final Executor executor,@NonNull final MainThread mainThread,@NonNull final Class<In> typeIn, @NonNull final Class<Out> typeOut) {
         this.executor = executor;
         this.mainThread = mainThread;
         this.typeIn = typeIn;
@@ -59,9 +60,9 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
 
     private void startFirebase() {
         ADFirebase firebase = new ADFirebase(typeOut);
-        List<ADEntityJSON> seriesJSON = firebase.download(buildQuery());
+        List<ADEntityJSON> jsons = firebase.download(buildQuery());
 
-        List<Out> entities = processEntities(seriesJSON);
+        List<Out> entities = processEntities(jsons);
 
         RealmRepository<In, Out> repository = new RealmRepository<>(typeIn, typeOut);
         repository.saveDAO(entities);
@@ -69,10 +70,9 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
         notifySuccess();
     }
 
-    protected abstract List<Out> processEntities(@NonNull List<ADEntityJSON> seriesJSON);
-
     protected abstract DatabaseReference buildQuery();
 
+    protected abstract List<Out> processEntities(@NonNull List<ADEntityJSON> jsons);
 
     private void notifyError() {
         mainThread.post(new Runnable() {
@@ -94,9 +94,12 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo activeNetworkInfo = null;
+        if (connectivityManager != null) {
+            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        }
 
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
             return true;
