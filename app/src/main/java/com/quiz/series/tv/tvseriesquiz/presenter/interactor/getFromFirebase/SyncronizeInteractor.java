@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.quiz.series.tv.tvseriesquiz.MyApp;
 import com.quiz.series.tv.tvseriesquiz.model.firebase.entityJSON.ADEntityJSON;
 import com.quiz.series.tv.tvseriesquiz.model.firebase.repository.ADFirebase;
@@ -60,7 +61,7 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
 
     private void startFirebase() {
         ADFirebase firebase = new ADFirebase(typeOut);
-        List<ADEntityJSON> jsons = firebase.download(buildQuery());
+        List<ADEntityJSON> jsons = firebase.download(buildQuery(firebase.getRootRef()));
 
         List<Out> entities = processEntities(jsons);
 
@@ -70,7 +71,7 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
         notifySuccess();
     }
 
-    protected abstract DatabaseReference buildQuery();
+    protected abstract Query buildQuery(DatabaseReference rootRef);
 
     protected abstract List<Out> processEntities(@NonNull List<ADEntityJSON> jsons);
 
