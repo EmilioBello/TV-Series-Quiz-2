@@ -26,4 +26,9 @@ public class ADConstants {
     public static final String IMAGE15X_VALUE           = "1.5";
     public static final String IMAGE2X_VALUE            = "2.0";
     public static final String IMAGE3X_VALUE            = "3.0";
+
+    public static final String serie                    = "SERIE";
+    public static final String question                 = "QUESTION";
+    public static final String version                  = "VERSION";
+
 }
