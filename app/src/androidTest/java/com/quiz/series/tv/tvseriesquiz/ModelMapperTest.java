@@ -1,14 +1,19 @@
 package com.quiz.series.tv.tvseriesquiz;
 
+import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADQuestion;
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADSerie;
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADVersion;
+import com.quiz.series.tv.tvseriesquiz.model.firebase.entityJSON.ADSerieJSON;
+import com.quiz.series.tv.tvseriesquiz.model.mapper.ADSerieJSONToSerieDAO;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADQuestionDAO;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADSerieDAO;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADVersionDAO;
+import com.quiz.series.tv.tvseriesquiz.utils.ADConstants;
+import com.quiz.series.tv.tvseriesquiz.utils.DisplayUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +69,57 @@ public class ModelMapperTest {
         assertEquals (dao.getStatus(), entity.getStatus());
         assertEquals (dao.getUrlAvatar(), entity.getUrlAvatar());
         assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground());
+    }
+
+    @Test
+    public void mapperSerieJSONToSerieDAO(){
+        final ADSerieJSON entity = createSerieJSON();
+
+        final ADSerieJSONToSerieDAO mapper = new ADSerieJSONToSerieDAO();
+
+        final ADSerieDAO dao = (ADSerieDAO) mapper.convertFirebaseObjectToDAO(entity);
+
+        assertEquals (dao.getCode(), entity.getCode());
+        assertEquals (dao.getName(), entity.getName());
+        assertEquals (dao.getSeason(), entity.getSeasons());
+        assertEquals (dao.getTotalEpisodes(), entity.getTotalEpisodes());
+        assertEquals (dao.isComplete(), entity.isComplete());
+        assertEquals (dao.getStatus(), entity.getStatus());
+
+        //check resolution image
+        String resolution = DisplayUtils.getDensity(InstrumentationRegistry.getContext());
+
+        if (ADConstants.IMAGE1X_VALUE.equals(resolution)) {
+            if (entity.getUrlAvatar1x() != null) {
+                assertEquals (dao.getUrlAvatar() ,entity.getUrlAvatar1x());
+                assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground1x());
+            }
+        } else if(ADConstants.IMAGE15X_VALUE.equals(resolution)) {
+            if (entity.getUrlAvatar15x() != null) {
+                assertEquals (dao.getUrlAvatar() ,entity.getUrlAvatar15x());
+                assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground15x());
+            }
+        } else if(ADConstants.IMAGE2X_VALUE.equals(resolution)) {
+            if (entity.getUrlAvatar2x() != null) {
+                assertEquals (dao.getUrlAvatar() ,entity.getUrlAvatar2x());
+                assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground2x());
+            }
+        } else if(ADConstants.IMAGE3X_VALUE.equals(resolution)) {
+            if (entity.getUrlAvatar3x() != null) {
+                assertEquals (dao.getUrlAvatar() ,entity.getUrlAvatar3x());
+                assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground3x());
+            }
+        } else if(resolution.startsWith("0")) {
+            if (entity.getUrlAvatar1x() != null) {
+                assertEquals (dao.getUrlAvatar() ,entity.getUrlAvatar1x());
+                assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground1x());
+            }
+        } else {
+            if (entity.getUrlAvatar3x() != null) {
+                assertEquals (dao.getUrlAvatar() ,entity.getUrlAvatar3x());
+                assertEquals (dao.getUrlImageBackground(), entity.getUrlImageBackground3x());
+            }
+        }
     }
 
     @Test
@@ -126,6 +182,37 @@ public class ModelMapperTest {
 
         entity.setUrlAvatar("7");
         entity.setUrlImageBackground("8");
+
+        return entity;
+    }
+
+    private ADSerieJSON createSerieJSON() {
+        ADSerieJSON entity = new ADSerieJSON();
+
+        entity.setCode(1);
+
+        entity.setName("Game of Thrones");
+
+        entity.setSeasons(2);
+        entity.setTotalEpisodes(3);
+
+        entity.setSeasonProgress(4);
+        entity.setEpisodeProgress(5);
+
+        entity.setListEpisode("1,2,3,4");
+
+        entity.setComplete(false);
+        entity.setStatus(6);
+
+        entity.setUrlAvatar1x("7");
+        entity.setUrlAvatar15x("8");
+        entity.setUrlAvatar2x("9");
+        entity.setUrlAvatar3x("10");
+
+        entity.setUrlImageBackground1x("11");
+        entity.setUrlImageBackground15x("12");
+        entity.setUrlImageBackground2x("13");
+        entity.setUrlImageBackground3x("14");
 
         return entity;
     }

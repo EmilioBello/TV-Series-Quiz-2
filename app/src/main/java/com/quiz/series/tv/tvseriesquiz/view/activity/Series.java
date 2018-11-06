@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.quiz.series.tv.tvseriesquiz.R;
 
-public class MainActivity extends AppCompatActivity {
+public class Series extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

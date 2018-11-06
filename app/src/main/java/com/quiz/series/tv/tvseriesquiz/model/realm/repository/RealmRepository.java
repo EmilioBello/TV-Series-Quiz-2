@@ -59,11 +59,23 @@ public class RealmRepository<In, Out> {
         }
     }
 
-    public List<In> fetchAll(RealmQuery<Out> query) {
+    public void saveDAO(final List<Out> entities){
+        if(!entities.isEmpty()){
+            Realm realm = getRealm();
+            realm.beginTransaction();
+
+            realm.insertOrUpdate((Collection<? extends RealmModel>) entities);
+
+            realm.commitTransaction();
+            realm.close();
+        }
+    }
+
+    public List<In> fetchAll(RealmQuery<RealmModel> query) {
         return fetchQuery(query);
     }
 
-    public In fetch(RealmQuery<Out> query) {
+    public In fetch(RealmQuery<RealmModel> query) {
         List<In> entities;
         entities = fetchQuery(query);
 
@@ -74,14 +86,14 @@ public class RealmRepository<In, Out> {
         }
     }
 
-    private List<In> fetchQuery(RealmQuery<Out> query) {
+    private List<In> fetchQuery(RealmQuery<RealmModel> query) {
 
-        RealmResults<Out> entitiesDAO = query.findAll();
+        RealmResults<RealmModel> entitiesDAO = query.findAll();
 
         final ModelMapper modelMapper = new ModelMapper();
 
         List<In> entities = new ArrayList<>();
-        for(Out entityDAO : entitiesDAO){
+        for(RealmModel entityDAO : entitiesDAO){
             final In entity = modelMapper.map(entityDAO, typeIn);
             entities.add(entity);
         }
@@ -97,12 +109,12 @@ public class RealmRepository<In, Out> {
         save(entities);
     }
 
-    public void delete(RealmQuery<Out> query){
+    public void delete(RealmQuery<RealmModel> query){
         final Realm realm = getRealm();
 
         realm.beginTransaction();
 
-        RealmResults<Out> result = query.findAll();
+        RealmResults<RealmModel> result = query.findAll();
         result.deleteAllFromRealm();
 
         realm.commitTransaction();
