@@ -18,10 +18,10 @@ public class ADFirebase {
 
     private DatabaseReference rootRef;
 
-    private final Class typeOut;
+    private final Class typeJSON;
 
-    public ADFirebase(@NonNull final Class typeOut) {
-        this.typeOut = typeOut;
+    public ADFirebase(@NonNull final Class typeJSON) {
+        this.typeJSON = typeJSON;
 
         if (rootRef == null) {
             rootRef = FirebaseDatabase.getInstance().getReference();
@@ -42,7 +42,7 @@ public class ADFirebase {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot entitySnapshot : dataSnapshot.getChildren()) {
                     try {
-                        final ADEntityJSON json = (ADEntityJSON) entitySnapshot.getValue(typeOut);
+                        final ADEntityJSON json = (ADEntityJSON) entitySnapshot.getValue(typeJSON);
                         entitiesDownloaded.add(json);
                     } catch (com.google.firebase.database.DatabaseException e) {
 
