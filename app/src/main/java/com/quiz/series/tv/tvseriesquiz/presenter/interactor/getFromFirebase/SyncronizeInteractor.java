@@ -16,13 +16,13 @@ import com.quiz.series.tv.tvseriesquiz.utils.executor.MainThread;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-//In = POJO, Out = EntityDAO
-public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterface,Runnable {
+public abstract class SyncronizeInteractor<POJO, DAO, JSON> implements SyncronizeInterface,Runnable {
 
     private final Executor executor;
     private final MainThread mainThread;
-    private final Class<In> typeIn;
-    private final Class<Out> typeOut;
+    private final Class<POJO> typePOJO;
+    private final Class<DAO> typeDAO;
+    private final Class<JSON> typeJSON;
 
     private Callback callback;
 
@@ -33,11 +33,13 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
     //Context
     protected final Context context;
 
-    public SyncronizeInteractor(@NonNull final Executor executor,@NonNull final MainThread mainThread,@NonNull final Class<In> typeIn, @NonNull final Class<Out> typeOut) {
+    public SyncronizeInteractor(@NonNull final Executor executor, @NonNull final MainThread mainThread,
+                                @NonNull final Class<POJO> typePOJO, @NonNull final Class<DAO> typeDAO, @NonNull final Class<JSON> typeJSON) {
         this.executor = executor;
         this.mainThread = mainThread;
-        this.typeIn = typeIn;
-        this.typeOut = typeOut;
+        this.typePOJO = typePOJO;
+        this.typeDAO = typeDAO;
+        this.typeJSON = typeJSON;
 
         this.error = false;
         this.messageError = "";
@@ -59,13 +61,14 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
         }
     }
 
-    private void startFirebase() {
-        ADFirebase firebase = new ADFirebase(typeOut);
+    //It is public to be easyly testeable
+    public void startFirebase() {
+        ADFirebase firebase = new ADFirebase(typeJSON);
         List<ADEntityJSON> jsons = firebase.download(buildQuery(firebase.getRootRef()));
 
-        List<Out> entities = processEntities(jsons);
+        List<DAO> entities = processEntities(jsons);
 
-        RealmRepository<In, Out> repository = new RealmRepository<>(typeIn, typeOut);
+        RealmRepository<POJO, DAO> repository = new RealmRepository<>(typePOJO, typeDAO);
         repository.saveDAO(entities);
 
         notifySuccess();
@@ -73,13 +76,15 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
 
     protected abstract Query buildQuery(DatabaseReference rootRef);
 
-    protected abstract List<Out> processEntities(@NonNull List<ADEntityJSON> jsons);
+    protected abstract List<DAO> processEntities(@NonNull List<ADEntityJSON> jsons);
 
     private void notifyError() {
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.notifyError(messageError);
+                if(callback != null){
+                    callback.notifyError(messageError);
+                }
             }
         });
     }
@@ -88,7 +93,9 @@ public abstract class SyncronizeInteractor<In, Out> implements SyncronizeInterfa
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.notifySuccess(true);
+                if(callback != null){
+                    callback.notifySuccess(true);
+                }
             }
         });
     }

@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADSerie;
 import com.quiz.series.tv.tvseriesquiz.model.firebase.entityJSON.ADEntityJSON;
+import com.quiz.series.tv.tvseriesquiz.model.firebase.entityJSON.ADSerieJSON;
 import com.quiz.series.tv.tvseriesquiz.model.mapper.ADSerieJSONToSerieDAO;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADSerieDAO;
 import com.quiz.series.tv.tvseriesquiz.utils.ADConstants;
@@ -15,16 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class SyncronizeSeriesInteractor extends SyncronizeInteractor<ADSerie, ADSerieDAO> {
+public class SyncronizeSeriesInteractor extends SyncronizeInteractor<ADSerie, ADSerieDAO, ADSerieJSON> {
 
     public SyncronizeSeriesInteractor(@NonNull Executor executor, @NonNull MainThread mainThread) {
-        super(executor, mainThread, ADSerie.class, ADSerieDAO.class);
+        super(executor, mainThread, ADSerie.class, ADSerieDAO.class, ADSerieJSON.class);
     }
 
     @Override
     protected Query buildQuery(@NonNull DatabaseReference rootRef) {
         final Query childRef = rootRef
-                .child(ADConstants.serie);
+                .child(ADConstants.serie + "/");
 
         return  childRef;
     }
