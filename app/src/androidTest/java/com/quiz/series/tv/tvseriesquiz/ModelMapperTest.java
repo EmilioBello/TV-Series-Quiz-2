@@ -81,7 +81,7 @@ public class ModelMapperTest {
 
         assertEquals (dao.getCode(), entity.getCode());
         assertEquals (dao.getName(), entity.getName());
-        assertEquals (dao.getSeason(), entity.getSeason());
+        assertEquals (dao.getSeason(), entity.getSeasons());
         assertEquals (dao.getTotalEpisodes(), entity.getTotalEpisodes());
         assertEquals (dao.isComplete(), entity.isComplete());
         assertEquals (dao.getStatus(), entity.getStatus());
@@ -193,7 +193,7 @@ public class ModelMapperTest {
 
         entity.setName("Game of Thrones");
 
-        entity.setSeason(2);
+        entity.setSeasons(2);
         entity.setTotalEpisodes(3);
 
         entity.setSeasonProgress(4);

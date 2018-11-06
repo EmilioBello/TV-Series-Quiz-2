@@ -11,7 +11,7 @@ public class ADSerieJSON extends ADEntityJSON{
     public ADSerieJSON() {}
 
     private String name;
-    private int season;
+    private int seasons;
     private int totalEpisodes;
     private String listEpisode;
 

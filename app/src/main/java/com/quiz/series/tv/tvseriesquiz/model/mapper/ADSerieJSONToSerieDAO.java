@@ -34,7 +34,7 @@ public class ADSerieJSONToSerieDAO {
         dao.setCode(json.getCode());
 
         dao.setName(json.getName());
-        dao.setSeason(json.getSeason());
+        dao.setSeason(json.getSeasons());
         dao.setTotalEpisodes(json.getTotalEpisodes());
 
         if(!StringUtils.isNullOrEmpty(json.getListEpisode())){
