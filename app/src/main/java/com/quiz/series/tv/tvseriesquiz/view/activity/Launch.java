@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import com.quiz.series.tv.tvseriesquiz.MyApp;
 import com.quiz.series.tv.tvseriesquiz.R;
 import com.quiz.series.tv.tvseriesquiz.presenter.LaunchPresenter;
+import com.quiz.series.tv.tvseriesquiz.presenter.Presenter;
 
 public class Launch extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class Launch extends AppCompatActivity {
     }
 
     private void init() {
-        final LaunchPresenter presenter = new LaunchPresenter(this);
+        final Presenter presenter = new LaunchPresenter(this);
         presenter.init();
     }
 
