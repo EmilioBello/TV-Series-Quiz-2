@@ -18,7 +18,7 @@ public class Launch extends AppCompatActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        setContentView(R.layout.launch);
+        setContentView(R.layout.activity_launch);
         
         mapUI();
         init();
@@ -42,5 +42,6 @@ public class Launch extends AppCompatActivity {
 
         Intent intent = new Intent(MyApp.getContext(), Series.class);
         startActivity(intent);
+        finish();
     }
 }
