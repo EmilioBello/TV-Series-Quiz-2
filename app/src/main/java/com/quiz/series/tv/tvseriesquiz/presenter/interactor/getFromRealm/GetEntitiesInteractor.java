@@ -11,7 +11,7 @@ import java.util.concurrent.Executor;
 
 public abstract class GetEntitiesInteractor<In, Out> implements Runnable, GetEntitiesInterface<In>{
     private final Executor executor;
-    private GetEntitiesInterface.Callback<In> callback;
+    private GetEntitiesInterface.Callback callback;
     private final MainThread mainThread;
 
     private final Class<In> typeIn;
@@ -26,7 +26,7 @@ public abstract class GetEntitiesInteractor<In, Out> implements Runnable, GetEnt
     }
 
     @Override
-    public void execute(@NonNull GetEntitiesInterface.Callback<In> callback) {
+    public void execute(@NonNull GetEntitiesInterface.Callback callback) {
         this.callback = callback;
 
         //call method override "run" from interface runnable
