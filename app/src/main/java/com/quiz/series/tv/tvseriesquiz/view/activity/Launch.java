@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import com.quiz.series.tv.tvseriesquiz.MyApp;
 import com.quiz.series.tv.tvseriesquiz.R;
 import com.quiz.series.tv.tvseriesquiz.presenter.LaunchPresenter;
+import com.quiz.series.tv.tvseriesquiz.presenter.Presenter;
 
 public class Launch extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class Launch extends AppCompatActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        setContentView(R.layout.launch);
+        setContentView(R.layout.activity_launch);
         
         mapUI();
         init();
@@ -28,7 +29,7 @@ public class Launch extends AppCompatActivity {
     }
 
     private void init() {
-        final LaunchPresenter presenter = new LaunchPresenter(this);
+        final Presenter presenter = new LaunchPresenter(this);
         presenter.init();
     }
 
@@ -41,5 +42,6 @@ public class Launch extends AppCompatActivity {
 
         Intent intent = new Intent(MyApp.getContext(), Series.class);
         startActivity(intent);
+        finish();
     }
 }

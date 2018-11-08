@@ -9,7 +9,7 @@ import com.quiz.series.tv.tvseriesquiz.view.activity.Launch;
 
 import java.util.concurrent.Executors;
 
-public class LaunchPresenter implements SyncronizeInterface.Callback{
+public class LaunchPresenter implements Presenter,SyncronizeInterface.Callback{
 
     private final Launch view;
 
@@ -17,6 +17,7 @@ public class LaunchPresenter implements SyncronizeInterface.Callback{
         this.view = view;
     }
 
+    @Override
     public void init(){
         view.progressStart();
 
@@ -38,3 +39,4 @@ public class LaunchPresenter implements SyncronizeInterface.Callback{
         view.progressEnd();
     }
 }
+

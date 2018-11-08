@@ -2,6 +2,7 @@ package com.quiz.series.tv.tvseriesquiz.presenter.interactor.getFromRealm;
 
 import android.support.annotation.NonNull;
 
+import com.quiz.series.tv.tvseriesquiz.model.POJO.ADSerie;
 import com.quiz.series.tv.tvseriesquiz.model.realm.entityDAO.ADSerieDAO;
 import com.quiz.series.tv.tvseriesquiz.model.schema.ADSerieSchema;
 import com.quiz.series.tv.tvseriesquiz.utils.executor.MainThread;
@@ -13,10 +14,10 @@ import io.realm.Realm;
 import io.realm.RealmModel;
 import io.realm.RealmQuery;
 
-public class GetAllSeriesInteractor<In, Out> extends GetEntitiesInteractor<In, Out>{
+public class GetAllSeriesInteractor extends GetEntitiesInteractor<ADSerie, ADSerieDAO>{
 
-    public GetAllSeriesInteractor(@NonNull final Executor executor, @NonNull final MainThread mainThread, @NonNull final Class<In> typeIn, @NonNull final Class<Out> typeOut) {
-        super(executor, mainThread, typeIn, typeOut);
+    public GetAllSeriesInteractor(@NonNull final Executor executor, @NonNull final MainThread mainThread) {
+        super(executor, mainThread, ADSerie.class, ADSerieDAO.class);
     }
 
     @Override
@@ -32,13 +33,12 @@ public class GetAllSeriesInteractor<In, Out> extends GetEntitiesInteractor<In, O
         final Class type = ADSerieDAO.class;
 
         query = realm.where(type);
-        query.equalTo(ADSerieSchema.active, true);
 
         return query;
     }
 
     @Override
-    public List<In> processResult(List<In> entities) {
+    public List<ADSerie> processResult(@NonNull List<ADSerie> entities) {
         return entities;
     }
 }
