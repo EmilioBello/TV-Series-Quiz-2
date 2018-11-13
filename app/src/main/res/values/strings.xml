@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">TV Series Quiz</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Serie Data -->
+    <string name="serie_progress">Progress</string>
+    <string name="serie_information">Information</string>
+    <string name="serie_season">Season:</string>
+    <string name="serie_episode">Episode:</string>
+    <string name="serie_status">Status:</string>
+    <string name="serie_status_working"> Working to Complete</string>
+    <string name="serie_status_atDay"> At Day</string>
+    <string name="serie_complete">Finish:</string>
+    <string name="serie_complete_yes"> Yes</string>
+    <string name="serie_complete_no"> No</string>
+    <string name="serie_of"> of </string>
+    <string name="serie_play">Play</string>
+
 </resources>

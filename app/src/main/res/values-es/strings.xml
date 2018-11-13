@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TV Series Quiz</string>
+    <string name="action_settings">Ajustes</string>
+
+    <!-- Serie Data -->
+    <string name="serie_progress">Progress</string>
+    <string name="serie_information">Información</string>
+    <string name="serie_season">Temporada:</string>
+    <string name="serie_episode">Episodio:</string>
+    <string name="serie_status">Estado:</string>
+    <string name="serie_status_working"> Trabajando para Completarla</string>
+    <string name="serie_status_atDay"> Al día</string>
+    <string name="serie_complete">Terminada:</string>
+    <string name="serie_complete_yes"> Si</string>
+    <string name="serie_complete_no"> No</string>
+    <string name="serie_of"> de </string>
+    <string name="serie_play">Jugar</string>
+
+</resources>
