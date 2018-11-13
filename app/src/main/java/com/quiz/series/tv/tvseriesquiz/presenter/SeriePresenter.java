@@ -2,8 +2,13 @@ package com.quiz.series.tv.tvseriesquiz.presenter;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.quiz.series.tv.tvseriesquiz.BR;
 import com.quiz.series.tv.tvseriesquiz.MyApp;
@@ -27,25 +32,26 @@ public class SeriePresenter implements Presenter,
         GetEntitiesInterface.Callback<ADSerie>, CommonAdapterListener<SeriesViewModel> {
 
     private final Series view;
+    private final RecyclerView rvSerie;
 
     private CommonAdapter<SeriesViewModel> adapter;
     private final List<SeriesViewModel> viewModels = new ArrayList<>();
 
     public SeriePresenter(@NonNull Series view) {
         this.view = view;
+
+        rvSerie = view.getRvSerie();
     }
 
     @Override
     public void init() {
-        final RecyclerView rvSerie = view.getRvSerie();
-
-        initializeAdapter(rvSerie);
+        initializeAdapter();
 
         GetEntitiesInterface<ADSerie> interactor = new GetAllSeriesInteractor(Executors.newSingleThreadExecutor(), new MainThreadImpl());
         interactor.execute(this);
     }
 
-    private void initializeAdapter(@NonNull RecyclerView rvSerie) {
+    private void initializeAdapter() {
         //adapter
         adapter = new CommonAdapter<>(this, viewModels, R.layout.row_serie, BR.serie);
         rvSerie.setAdapter(adapter);
@@ -73,10 +79,24 @@ public class SeriePresenter implements Presenter,
     }
 
     @Override
-    public void getItem(SeriesViewModel viewModel) {
+    public void getItem(@NonNull SeriesViewModel viewModel, View cardView) {
+        ActivityOptionsCompat options = transitionSharedElements(cardView);
+
         Intent i = new Intent(MyApp.getContext(), SeriesDetail.class);
         i.putExtra(ADConstants.serie, viewModel);
 
-        view.startActivity(i);
+        view.startActivity(i, options.toBundle());
+    }
+
+    @NonNull
+    private ActivityOptionsCompat transitionSharedElements(@NonNull View cardView) {
+        final ImageView ivBackground = cardView.findViewById(R.id.ivImageBackground);
+        final Pair<View, String> p1 = new Pair<>((View) ivBackground, ViewCompat.getTransitionName(ivBackground));
+
+        final ImageView ivAvatar = cardView.findViewById(R.id.ivAvatar);
+        final Pair<View, String> p2 = new Pair<>((View) ivAvatar, ViewCompat.getTransitionName(ivAvatar));
+
+        return ActivityOptionsCompat
+                .makeSceneTransitionAnimation(view, p1, p2);
     }
 }

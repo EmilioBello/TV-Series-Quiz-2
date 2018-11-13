@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.ImageView;
 
 import com.quiz.series.tv.tvseriesquiz.R;
 import com.quiz.series.tv.tvseriesquiz.presenter.Presenter;
@@ -14,10 +17,12 @@ import com.quiz.series.tv.tvseriesquiz.presenter.SeriePresenter;
 public class Series extends AppCompatActivity {
 
     private RecyclerView rvSerie;
+    private ImageView ivImageBackground, ivAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        transitionSetup();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -28,6 +33,8 @@ public class Series extends AppCompatActivity {
 
     private void mapUI() {
         rvSerie = findViewById(R.id.rvSeries);
+        ivImageBackground = findViewById(R.id.ivImageBackground);
+        ivAvatar = findViewById(R.id.ivAvatar);
     }
 
     private void init() {
@@ -59,5 +66,21 @@ public class Series extends AppCompatActivity {
 
     public RecyclerView getRvSerie() {
         return rvSerie;
+    }
+
+    public ImageView getIvImageBackground() {
+        return ivImageBackground;
+    }
+
+    public ImageView getIvAvatar() {
+        return ivAvatar;
+    }
+
+    private void transitionSetup() {
+        // inside your activity (if you did not enable transitions in your theme)
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        // set an exit transition
+        getWindow().setExitTransition(new Explode());
+        getWindow().setEnterTransition(new Explode());
     }
 }
