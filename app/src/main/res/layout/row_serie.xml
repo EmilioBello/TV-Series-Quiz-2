@@ -32,8 +32,9 @@
                 android:layout_height="250dp"
                 android:alpha=".6"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{serie.urlImageBackground}"
-                />
+                android:transitionName="background"
+                app:imageUrl="@{serie.urlImageBackground}"/>
+
 
         </FrameLayout>
 
@@ -71,6 +72,7 @@
                 android:layout_width="95dip"
                 android:layout_height="140dip"
                 android:scaleType="centerCrop"
+                android:transitionName="avatar"
                 app:imageUrl="@{serie.urlAvatar}" />
         </FrameLayout>
 
