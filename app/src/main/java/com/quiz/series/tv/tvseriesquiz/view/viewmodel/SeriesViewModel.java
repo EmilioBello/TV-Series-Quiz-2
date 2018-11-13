@@ -7,12 +7,13 @@ import com.bumptech.glide.Glide;
 import com.quiz.series.tv.tvseriesquiz.MyApp;
 import com.quiz.series.tv.tvseriesquiz.model.POJO.ADSerie;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import lombok.Data;
 
 @Data
-public class SeriesViewModel {
+public class SeriesViewModel implements Serializable {
 
     private int code;
     private String name;

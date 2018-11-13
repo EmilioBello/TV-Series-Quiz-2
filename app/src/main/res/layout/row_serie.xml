@@ -5,9 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="serie"
-            type="com.quiz.series.tv.tvseriesquiz.view.viewmodel.SeriesViewModel"/>
+        <variable name="serie" type="com.quiz.series.tv.tvseriesquiz.view.viewmodel.SeriesViewModel"/>
+        <variable name="listener" type="com.quiz.series.tv.tvseriesquiz.view.adapter.CommonAdapter.Listener"/>
     </data>
 
     <android.support.v7.widget.CardView
@@ -15,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:clipChildren="true"
-        android:clipToPadding="true">
+        android:clipToPadding="true"
+        android:onClick="@{() -> listener.onClickListener()}">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -32,8 +32,9 @@
                 android:layout_height="250dp"
                 android:alpha=".6"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{serie.urlImageBackground}"
-                />
+                android:transitionName="background"
+                app:imageUrl="@{serie.urlImageBackground}"/>
+
 
         </FrameLayout>
 
@@ -71,6 +72,7 @@
                 android:layout_width="95dip"
                 android:layout_height="140dip"
                 android:scaleType="centerCrop"
+                android:transitionName="avatar"
                 app:imageUrl="@{serie.urlAvatar}" />
         </FrameLayout>
 

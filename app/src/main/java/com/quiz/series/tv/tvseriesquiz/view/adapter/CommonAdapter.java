@@ -4,17 +4,25 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.quiz.series.tv.tvseriesquiz.BR;
+import com.quiz.series.tv.tvseriesquiz.view.viewmodel.SeriesViewModel;
 
 import java.util.List;
 
-public class CommonAdapter<In> extends RecyclerView.Adapter<CommonAdapter.ViewHolder>{
+public class CommonAdapter<ViewModel> extends RecyclerView.Adapter<CommonAdapter.ViewHolder>{
 
-    private final List<In> items;
+    private final List<ViewModel> items;
     private final int layout;
     private final int layoutItemID;
+    private final CommonAdapterListener<ViewModel> listener;
 
-    public CommonAdapter(final List<In> items, final int layout, final int layoutItemID) {
+    private View v;
+
+    public CommonAdapter(final CommonAdapterListener<ViewModel> listener, final List<ViewModel> items, final int layout, final int layoutItemID) {
+        this.listener = listener;
         this.items = items;
         this.layout = layout;
         this.layoutItemID = layoutItemID;
@@ -38,7 +46,7 @@ public class CommonAdapter<In> extends RecyclerView.Adapter<CommonAdapter.ViewHo
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements Listener{
         private final ViewDataBinding binding;
         private final int layoutItemID;
 
@@ -51,11 +59,25 @@ public class CommonAdapter<In> extends RecyclerView.Adapter<CommonAdapter.ViewHo
 
         public void bind(Object item) {
             binding.setVariable(layoutItemID, item);
+            binding.setVariable(BR.listener, this); //Line to handler onClick events
             binding.executePendingBindings();
+        }
+
+        @Override
+        public void onClickListener() {
+            if (listener != null) {
+                final int position = getAdapterPosition();
+                listener.getItem(items.get(position), itemView);
+            }
         }
     }
 
     public void update(){
         notifyDataSetChanged();
+    }
+
+    //Interface to handler onClick events
+    public interface Listener {
+        void onClickListener();
     }
 }

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/cvSerie"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:clipChildren="true"
+            android:clipToPadding="true">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_placeholder"
+                android:clipChildren="true"
+                android:clipToPadding="true">
+
+                <!-- this image must be higher than the cell, to enable parallax ! -->
+
+                <ImageView
+                    android:id="@+id/ivImageBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha=".6"
+                    android:scaleType="centerCrop"
+                    android:transitionName="background"/>
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dip"
+                android:background="@drawable/top_shadow"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_black_85" />
+
+            <View
+                android:id="@+id/vBlanck"
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_gravity="bottom"
+                android:background="@android:color/white" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"
+                android:background="@android:color/white"
+                android:padding="2dp"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="95dip"
+                    android:layout_height="140dip"
+                    android:scaleType="centerCrop"
+                    android:transitionName="avatar"/>
+            </FrameLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="15sp"
+                    android:text="@string/serie_progress"
+                    android:textSize="@dimen/sizeBigText"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15sp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20sp"
+                        android:text="@string/serie_season"
+                        android:textSize="@dimen/sizeMiddleText"/>
+
+                    <com.daimajia.numberprogressbar.NumberProgressBar
+                        android:id="@+id/pbSeason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25sp"
+
+                        app:progress_unreached_color="@color/colorAccent"
+                        app:progress_reached_color="@color/colorPrimary"
+
+                        app:progress_unreached_bar_height="1sp"
+                        app:progress_reached_bar_height="10sp"
+
+                        app:progress_text_size="10sp"
+                        app:progress_text_color="#3498DB"
+                        app:progress_text_offset="1sp"
+                        app:progress_text_visibility="visible"
+
+                        app:progress_max="100"
+                        app:progress_current="80"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20sp"
+                        android:text="@string/serie_episode"
+                        android:textSize="@dimen/sizeMiddleText"/>
+
+                    <com.daimajia.numberprogressbar.NumberProgressBar
+                        android:id="@+id/pbEpisode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25sp"
+
+                        app:progress_unreached_color="@color/colorAccent"
+                        app:progress_reached_color="@color/colorPrimary"
+
+                        app:progress_unreached_bar_height="1dp"
+                        app:progress_reached_bar_height="10dp"
+
+                        app:progress_text_size="10sp"
+                        app:progress_text_color="#3498DB"
+                        app:progress_text_offset="1dp"
+                        app:progress_text_visibility="visible"
+
+                        app:progress_max="100"
+                        app:progress_current="80"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="10sp">
+
+                <Button
+                    android:id="@+id/btPlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_marginLeft="5sp"
+                    android:text="@string/serie_play"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

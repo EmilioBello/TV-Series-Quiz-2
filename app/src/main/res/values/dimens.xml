@@ -1,3 +1,28 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- App -->
+    <dimen name="verticalSpacing">16dp</dimen>
+    <dimen name="horizontalSpacing">16dp</dimen>
+    <dimen name="verticalSmallSpacing">8dp</dimen>
+    <dimen name="horizontalSmallSpacing">8dp</dimen>
+    <dimen name="sizeXSmallText">10sp</dimen>
+    <dimen name="sizeSmallText">12sp</dimen>
+    <dimen name="sizeText">14sp</dimen>
+    <dimen name="sizeMiddleText">18sp</dimen>
+    <dimen name="sizeBigText">20sp</dimen>
+    <dimen name="sizeBigBigText">28sp</dimen>
+    <dimen name="marginSpacing">5dp</dimen>
+    <dimen name="paddingSpacing">5dp</dimen>
+    <dimen name="heightDivider">1dip</dimen>
+
+    <dimen name="spacing_xsmall">2dp</dimen>
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+
+    <dimen name="heightMiniature">56dp</dimen>
+    <dimen name="widthMiniature">56dp</dimen>
+    <dimen name="heightImageLogo">200dp</dimen>
 </resources>
