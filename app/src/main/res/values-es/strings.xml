@@ -17,4 +17,12 @@
     <string name="serie_of"> de </string>
     <string name="serie_play">Jugar</string>
 
+    <!-- Serie Data -->
+    <string name="season_lose">La respuesta ha sido incorrecta.</string>
+    <string name="season_win">Has compleado todas las preguntas\n¡Enhorabuena!</string>
+
+    <!-- Questions -->
+    <string name="finish">Terminar</string>
+    <string name="question_season">Temporada:</string>
+    <string name="question_episode">Episodio:</string>
 </resources>
