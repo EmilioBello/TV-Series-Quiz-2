@@ -66,4 +66,8 @@ public class SeriesDetail extends AppCompatActivity {
     public ImageView getIvAvatar() {
         return ivAvatar;
     }
+
+    public Button getBtPlay() {
+        return btPlay;
+    }
 }
