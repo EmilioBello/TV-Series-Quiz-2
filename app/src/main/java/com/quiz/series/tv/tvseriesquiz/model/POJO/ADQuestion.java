@@ -24,5 +24,5 @@ public class ADQuestion{
 
     private String language;
     
-    private int serieCode;
+    private int serie_code;
 }
